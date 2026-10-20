@@ -54,7 +54,7 @@ namespace MNRPropMover.Types
         }
 
 #if _LINUX
-        // not optimal at all
+        // TODO: Can we improve this?
         private static Process? FindProcess()
         {
             foreach (var process in Process.GetProcesses())
@@ -135,6 +135,8 @@ namespace MNRPropMover.Types
                     return LinuxKernel.process_vm_readv(_process.Id, &localIov, 1, &remoteIov, 1, 0) == buffer.Length;
                 }
             }
+#else
+            return false;
 #endif
         }
 
@@ -153,6 +155,8 @@ namespace MNRPropMover.Types
                     return LinuxKernel.process_vm_writev(_process.Id, &localIov, 1, &remoteIov, 1, 0) == buffer.Length;
                 }
             }
+#else
+            return false;
 #endif
         }
     }
