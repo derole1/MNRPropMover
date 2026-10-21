@@ -42,6 +42,15 @@ Please do not report these unless you have good reason to believe that it is an 
 **E** - Rotate Right
 
 
+90-degree rotation per press:
+
+**U / O** - X axis
+
+**J / L** - Y axis
+
+**I / K** - Z axis
+
+
 **Page Up** - Scale Up
 
 **Page Down** - Scale Down
