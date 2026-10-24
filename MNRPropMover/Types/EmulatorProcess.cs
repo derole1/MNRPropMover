@@ -170,6 +170,38 @@ namespace MNRPropMover.Types
             return buffer;
         }
 
+        public string ReadString(ulong address)
+        {
+            if (!IsRunning)
+                return "";
+
+            var str = "";
+
+            while (true)
+            {
+                byte[] buffer = new byte[1];
+                if (!ReadMemory(address++, buffer))
+                    break;
+                if (buffer[0] == 0)
+                    break;
+                str += (char)buffer[0];
+            }
+
+            return str;
+        }
+
+        public bool WriteString(ulong address, string value)
+        {
+            if (!IsRunning)
+                return false;
+
+            var bytes = Encoding.ASCII.GetBytes($"{value}\0");
+            if (!WriteMemory(address, bytes))
+                return false;
+
+            return true;
+        }
+
         private bool ReadMemory(ulong address, byte[] buffer)
         {
 #if _WINDOWS

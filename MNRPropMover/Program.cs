@@ -23,6 +23,9 @@ namespace MNRPropMover
                 return;
             }
 
+            // When hooking, disable the check for all _pitrow_ props that causes them to be deleted
+            _process.WriteString(RPCS3Constants.RPCS3_EMU_BASE_ADDRESS + RPCS3Constants.PITROW_STRING_ADDRESS, "");
+
             _propStamp = new MNRPropStamp(_process);
             _worldChunks = new MNRWorldChunkList(_process);
             _propController = new PropController(_propStamp);
