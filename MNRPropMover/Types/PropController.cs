@@ -12,7 +12,7 @@ namespace MNRPropMover.Types
         const float MAX_STEP = 0.05f;
         const float MAX_STEP_MOVE = MAX_STEP * 10f;
         const float DURATION = 2f;
-        const float QUARTER_TURN = MathF.PI / 2f;
+        const float TURN_45_DEG = MathF.PI / 4f;
 
         private MNRPropStamp _propStamp;
         private float stepProgress = 0;
@@ -46,12 +46,12 @@ namespace MNRPropMover.Types
             if (Win32.GetAsyncKeyState(Win32.VK_Q) != 0) currentState |= PropControllerState.RotateLeft;
             if (Win32.GetAsyncKeyState(Win32.VK_E) != 0) currentState |= PropControllerState.RotateRight;
 
-            if (Win32.GetAsyncKeyState(Win32.VK_U) != 0) currentState |= PropControllerState.RotateXNegative90;
-            if (Win32.GetAsyncKeyState(Win32.VK_O) != 0) currentState |= PropControllerState.RotateXPositive90;
-            if (Win32.GetAsyncKeyState(Win32.VK_J) != 0) currentState |= PropControllerState.RotateYNegative90;
-            if (Win32.GetAsyncKeyState(Win32.VK_L) != 0) currentState |= PropControllerState.RotateYPositive90;
-            if (Win32.GetAsyncKeyState(Win32.VK_I) != 0) currentState |= PropControllerState.RotateZNegative90;
-            if (Win32.GetAsyncKeyState(Win32.VK_K) != 0) currentState |= PropControllerState.RotateZPositive90;
+            if (Win32.GetAsyncKeyState(Win32.VK_I) != 0) currentState |= PropControllerState.TiltForward45;
+            if (Win32.GetAsyncKeyState(Win32.VK_K) != 0) currentState |= PropControllerState.TiltBackward45;
+            if (Win32.GetAsyncKeyState(Win32.VK_J) != 0) currentState |= PropControllerState.TiltLeft45;
+            if (Win32.GetAsyncKeyState(Win32.VK_L) != 0) currentState |= PropControllerState.TiltRight45;
+            if (Win32.GetAsyncKeyState(Win32.VK_U) != 0) currentState |= PropControllerState.RotateLeft45;
+            if (Win32.GetAsyncKeyState(Win32.VK_O) != 0) currentState |= PropControllerState.RotateRight45;
 
             if (Win32.GetAsyncKeyState(Win32.VK_PRIOR) != 0) currentState |= PropControllerState.ScaleUp;
             if (Win32.GetAsyncKeyState(Win32.VK_NEXT) != 0) currentState |= PropControllerState.ScaleDown;
@@ -80,12 +80,12 @@ namespace MNRPropMover.Types
                 else if (key == ConsoleKey.Q) currentState |= PropControllerState.RotateLeft;
                 else if (key == ConsoleKey.E) currentState |= PropControllerState.RotateRight;
 
-                else if (key == ConsoleKey.U) currentState |= PropControllerState.RotateXNegative90;
-                else if (key == ConsoleKey.O) currentState |= PropControllerState.RotateXPositive90;
-                else if (key == ConsoleKey.J) currentState |= PropControllerState.RotateYNegative90;
-                else if (key == ConsoleKey.L) currentState |= PropControllerState.RotateYPositive90;
-                else if (key == ConsoleKey.I) currentState |= PropControllerState.RotateZNegative90;
-                else if (key == ConsoleKey.K) currentState |= PropControllerState.RotateZPositive90;
+                else if (key == ConsoleKey.I) currentState |= PropControllerState.TiltForward45;
+                else if (key == ConsoleKey.K) currentState |= PropControllerState.TiltBackward45;
+                else if (key == ConsoleKey.J) currentState |= PropControllerState.TiltLeft45;
+                else if (key == ConsoleKey.L) currentState |= PropControllerState.TiltRight45;
+                else if (key == ConsoleKey.U) currentState |= PropControllerState.RotateLeft45;
+                else if (key == ConsoleKey.O) currentState |= PropControllerState.RotateRight45;
 
                 else if (key == ConsoleKey.PageUp) currentState |= PropControllerState.ScaleUp;
                 else if (key == ConsoleKey.PageDown) currentState |= PropControllerState.ScaleDown;
@@ -138,18 +138,18 @@ namespace MNRPropMover.Types
             if ((currentState & PropControllerState.RotateRight) == PropControllerState.RotateRight)
                 Prop.RotationX += Lerp(MIN_STEP, MAX_STEP, stepProgress);
 
-            if ((currentState & PropControllerState.RotateXNegative90) != 0 && (state & PropControllerState.RotateXNegative90) == 0)
-                Prop.RotationX -= QUARTER_TURN;
-            if ((currentState & PropControllerState.RotateXPositive90) != 0 && (state & PropControllerState.RotateXPositive90) == 0)
-                Prop.RotationX += QUARTER_TURN;
-            if ((currentState & PropControllerState.RotateYNegative90) != 0 && (state & PropControllerState.RotateYNegative90) == 0)
-                Prop.RotationY -= QUARTER_TURN;
-            if ((currentState & PropControllerState.RotateYPositive90) != 0 && (state & PropControllerState.RotateYPositive90) == 0)
-                Prop.RotationY += QUARTER_TURN;
-            if ((currentState & PropControllerState.RotateZNegative90) != 0 && (state & PropControllerState.RotateZNegative90) == 0)
-                Prop.RotationZ -= QUARTER_TURN;
-            if ((currentState & PropControllerState.RotateZPositive90) != 0 && (state & PropControllerState.RotateZPositive90) == 0)
-                Prop.RotationZ += QUARTER_TURN;
+            if ((currentState & PropControllerState.TiltForward45) != 0 && (state & PropControllerState.TiltForward45) == 0)
+                Prop.RotationY -= TURN_45_DEG;
+            if ((currentState & PropControllerState.TiltBackward45) != 0 && (state & PropControllerState.TiltBackward45) == 0)
+                Prop.RotationY += TURN_45_DEG;
+            if ((currentState & PropControllerState.TiltLeft45) != 0 && (state & PropControllerState.TiltLeft45) == 0)
+                Prop.RotationZ -= TURN_45_DEG;
+            if ((currentState & PropControllerState.TiltRight45) != 0 && (state & PropControllerState.TiltRight45) == 0)
+                Prop.RotationZ += TURN_45_DEG;
+            if ((currentState & PropControllerState.RotateLeft45) != 0 && (state & PropControllerState.RotateLeft45) == 0)
+                Prop.RotationX -= TURN_45_DEG;
+            if ((currentState & PropControllerState.RotateRight45) != 0 && (state & PropControllerState.RotateRight45) == 0)
+                Prop.RotationX += TURN_45_DEG;
 
             if ((currentState & PropControllerState.ScaleUp) == PropControllerState.ScaleUp)
                 Prop.Scale += Lerp(MIN_STEP, MAX_STEP, stepProgress);

@@ -31,12 +31,12 @@ namespace MNRPropMover.Types
         PreviousProp = (1 << 14),
         NextProp = (1 << 15),
         
-        RotateXNegative90 = (1 << 16),
-        RotateXPositive90 = (1 << 17),
-        RotateYNegative90 = (1 << 18),
-        RotateYPositive90 = (1 << 19),
-        RotateZNegative90 = (1 << 20),
-        RotateZPositive90 = (1 << 21),
+        RotateLeft45 = (1 << 16),
+        RotateRight45 = (1 << 17),
+        TiltForward45 = (1 << 18),
+        TiltBackward45 = (1 << 19),
+        TiltLeft45 = (1 << 20),
+        TiltRight45 = (1 << 21),
 
         TiltForwardBackward = TiltForward | TiltBackward,
         TiltLeftRight = TiltLeft | TiltRight,
