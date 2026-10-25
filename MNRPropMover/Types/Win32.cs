@@ -37,6 +37,12 @@ namespace MNRPropMover.Types
         public static readonly int VK_E = 0x45;
         public static readonly int VK_R = 0x52;
         public static readonly int VK_F = 0x46;
+        public static readonly int VK_U = 0x55;
+        public static readonly int VK_O = 0x4F;
+        public static readonly int VK_J = 0x4A;
+        public static readonly int VK_L = 0x4C;
+        public static readonly int VK_I = 0x49;
+        public static readonly int VK_K = 0x4B;
         public static readonly int VK_OEM_4 = 0xDB; // [
         public static readonly int VK_OEM_6 = 0xDD; // ]
 

@@ -42,6 +42,15 @@ Please do not report these unless you have good reason to believe that it is an 
 **E** - Rotate Right
 
 
+45-degree rotation per press:
+
+**U / O** - Rotate Left/Right
+
+**I / K** - Tilt Forward/Backward
+
+**J / L** - Tilt Left/Right
+
+
 **Page Up** - Scale Up
 
 **Page Down** - Scale Down
