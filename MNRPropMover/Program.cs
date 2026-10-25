@@ -16,6 +16,16 @@ namespace MNRPropMover
             if (args.Contains("--debug") || args.Contains("-d"))
                 _debug = true;
 
+#if _LINUX
+            int ptraceScope = GetPtraceScope();
+            if (ptraceScope != 0)
+            {
+                Console.WriteLine($"Ptrace scope is {ptraceScope}."
+                    + "\nRun: sudo sysctl -w kernel.yama.ptrace_scope=0 or run this program as superuser");
+                return;
+            }
+#endif
+
             _process = new EmulatorProcess("rpcs3");
             if (!_process.Attach())
             {
@@ -80,5 +90,16 @@ namespace MNRPropMover
             // Disable the check for all _pitrow_ props that causes them to be deleted
             _process.WriteString(RPCS3Constants.RPCS3_EMU_BASE_ADDRESS + RPCS3Constants.PITROW_STRING_ADDRESS, "");
         }
+
+#if _LINUX
+        static int GetPtraceScope()
+        {
+            using (var reader = new StreamReader("/proc/sys/kernel/yama/ptrace_scope"))
+            {
+                return int.Parse(reader.ReadToEnd());
+            }
+        }
+#endif
+
     }
 }

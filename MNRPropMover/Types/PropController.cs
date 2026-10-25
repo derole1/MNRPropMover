@@ -69,7 +69,8 @@ namespace MNRPropMover.Types
             // TODO: Implement backgground key detection for Linux (Equivalent of GetAsyncKeyState?)
             while (Console.KeyAvailable)
             {
-                var key = Console.ReadKey(true).Key;
+                var keyInfo = Console.ReadKey(true);
+                var key = keyInfo.Key;
 
                 if (key == ConsoleKey.UpArrow) currentState |= PropControllerState.TiltForward;
                 else if (key == ConsoleKey.DownArrow) currentState |= PropControllerState.TiltBackward;
@@ -96,8 +97,8 @@ namespace MNRPropMover.Types
                 else if (key == ConsoleKey.R) currentState |= PropControllerState.MoveUp;
                 else if (key == ConsoleKey.F) currentState |= PropControllerState.MoveDown;
                 
-                else if (key == ConsoleKey.Oem4) currentState |= PropControllerState.PreviousProp;
-                else if (key == ConsoleKey.Oem6) currentState |= PropControllerState.NextProp;
+                else if (key == ConsoleKey.Oem4 || keyInfo.KeyChar == '[') currentState |= PropControllerState.PreviousProp;
+                else if (key == ConsoleKey.Oem6 || keyInfo.KeyChar == ']') currentState |= PropControllerState.NextProp;
             }
 #endif
 
