@@ -12,5 +12,6 @@ namespace MNRPropMover.Types
         // MNR 1.11 US
         public const ulong WORLD_CHUNKS_ADDRESS = 0x01468150;
         public const ulong PROP_STAMP_ADDRESS = 0x00F03688;
+        public const ulong PITROW_STRING_ADDRESS = 0x0140d738;
     }
 }

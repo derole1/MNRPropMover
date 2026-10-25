@@ -76,6 +76,9 @@ namespace MNRPropMover
             }
             else
                 Console.Write("No prop is currently selected.");
+
+            // Disable the check for all _pitrow_ props that causes them to be deleted
+            _process.WriteString(RPCS3Constants.RPCS3_EMU_BASE_ADDRESS + RPCS3Constants.PITROW_STRING_ADDRESS, "");
         }
     }
 }
