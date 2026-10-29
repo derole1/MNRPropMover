@@ -68,6 +68,7 @@ namespace MNRPropMover
                 _propController.Update(deltaTime);
 
                 Console.Write($"Current Prop Information:\n\n" +
+                                $"Type UID: 0x{currentProp.TypeUID:x}\n" +
                                 $"Position: X={currentProp.PositionX}, Y={currentProp.PositionY}, Z={currentProp.PositionZ}\n" +
                                 $"Rotation: X={currentProp.RotationX}, Y={currentProp.RotationY}, Z={currentProp.RotationZ}\n" +
                                 $"Scale: {currentProp.Scale}");
